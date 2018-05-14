@@ -8,6 +8,10 @@ import DetailPlan from './pages/detail-plan/DetailPlan';
 import RegionPage from './pages/region/Region';
 import UserPage from './pages/user-page/UserPage';
 
+import TodoPage from './pages/todo-home/Todo';
+import TodoDetailPage from './pages/todo-detail/TodoDetail';
+import TodoRegisterPage from './pages/todo-register/TodoRegister';
+
 
 export default [
   { name: 'home', path: '/', component: HomeBase },
@@ -18,4 +22,8 @@ export default [
   { name: 'detail-plan', path: '/detail-plan', component: DetailPlan },
   { name: 'region', path: '/region', component: RegionPage },
   { name: 'userPage', path: '/user-page', component: UserPage },
+  { name: 'todo', path: '/todo', component: TodoPage },
+  { name: 'todo-detail', path: '/todo-detail', component: TodoDetailPage },
+  { name: 'todo-register', path: '/todo-register', component: TodoRegisterPage },
+  
 ];

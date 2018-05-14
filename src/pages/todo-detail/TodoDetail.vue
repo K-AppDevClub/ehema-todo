@@ -5,12 +5,12 @@
 </style>
 <template>
 <v-ons-page>
-  <navbar></navbar>
+  <navbar navType="back" msg="todo"></navbar>
   <div class="page-content">
     <h3 class="page-title">
-      about
+      detail
     </h3>
-    <p>Vue sample App</p>
+    <p>ここにid,uid,content,lat,lng表示</p>
   </div>
 </v-ons-page>
 </template>

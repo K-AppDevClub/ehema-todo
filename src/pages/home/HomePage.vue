@@ -18,6 +18,7 @@
       </v-ons-list-header>
       <v-ons-list-item @click="goRegion">地域:  {{currentArea.name}}</v-ons-list-item>
       <v-ons-list-item @click="goRegion">並び順：人気順</v-ons-list-item>
+      <v-ons-list-item @click="goTodo">ehama-todo</v-ons-list-item>
     </v-ons-list>
     <!-- <v-ons-list-header>話題のデート体験記</v-ons-list-header> -->
     <v-ons-card v-for='item in experiences' :v-bind='item' v-bind:key="item.id" @click="goPlan(item.id)">
@@ -41,6 +42,7 @@ import LoadingIndicator from '../../components/loading-indicator/LoadingIndicato
 import CreatePlan from '../../pages/create-plan/CreatePlan';
 import RegionPage from '../../pages/region/Region';
 import DetailPlan from '../../pages/detail-plan/DetailPlan';
+import TodoPage from '../../pages/todo-home/Todo';
 import Navbar from '../../components/navbar/Navbar';
 import Config from '../../config/Config';
 
@@ -51,6 +53,9 @@ export default {
     Navbar,
   },
   methods: {
+    goTodo() {
+      this.$emit('push-page', TodoPage)
+    },
     goCreate() {
       this.$emit('push-page', CreatePlan)
     },
