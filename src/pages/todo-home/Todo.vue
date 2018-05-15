@@ -13,7 +13,7 @@
         <v-ons-icon icon="ion-favorite, material:md-favorite"></v-ons-icon>
         いきたいとこリスト
       </v-ons-list-header>
-      <v-ons-list-item v-for="item in arr" v-bind:key="item" @click="goDetail">{{ item }}</v-ons-list-item>
+      <v-ons-list-item v-for="(item,index) in arr" v-bind:key="item" @click="goDetail(index)">{{ item.content }}</v-ons-list-item>
     </v-ons-list>
   </div>
 </v-ons-page>
@@ -38,8 +38,8 @@ export default {
     this.axios.get('http://59.157.6.140:3001/todos')
       .then((res) => {
         for (let i = 0; i < res.data.length; i++) {  
-          console.log(res.data[i].content);        
-          this.arr.push(res.data[i].content);
+          // console.log(res.data[i].content);        
+          this.arr.push(res.data[i]);
         }
       })
       .catch((error) => {
@@ -47,9 +47,13 @@ export default {
       });
   },
   methods: {
-    goDetail() {
-      this.$emit('push-page', TodoDetailPage)
-      console.log(this.arr);
+    goDetail(id) {
+      this.$emit('push-page', {
+        extends: TodoDetailPage,
+        onsNavigatorProps: {
+          infos: this.arr[id],
+        }
+      })
     },
     goRegister() {
       this.$emit('push-page', TodoRegisterPage)

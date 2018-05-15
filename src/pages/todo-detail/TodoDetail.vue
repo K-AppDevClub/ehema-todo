@@ -7,10 +7,8 @@
 <v-ons-page>
   <navbar navType="back" msg="todo"></navbar>
   <div class="page-content">
-    <h3 class="page-title">
-      detail
-    </h3>
-    <p>ここにid,uid,content,lat,lng表示</p>
+    <h3 class="page-title">detail</h3>
+    <div style="margin: 10px" v-for="(value, key) in infos" v-bind:key="value">{{ key }}: {{ value }}</div>
   </div>
 </v-ons-page>
 </template>
@@ -22,6 +20,9 @@ export default {
   name: 'posts-page',
   components: {
     Navbar,
+  },
+  props: {
+    infos: [],
   },
 };
 </script>
