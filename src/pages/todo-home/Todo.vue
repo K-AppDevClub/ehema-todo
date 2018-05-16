@@ -39,10 +39,17 @@
     </GmapMap></center>
     <v-ons-list> 
       <v-ons-list-header>
-        <v-ons-icon icon="ion-favorite, material:md-favorite"></v-ons-icon>
+      <v-ons-icon icon="ion-favorite, material:md-favorite"></v-ons-icon>
         いきたいとこリスト
       </v-ons-list-header>
-      <v-ons-list-item v-for="(item,index) in arr" v-bind:key="item.id" @click="goDetail(index)">{{ item.content }}</v-ons-list-item>
+      <v-ons-list-item v-for="(item,index) in arr" v-bind:key="item.id" @click="goDetail(index)">
+        {{ item.content }}
+        <div class="right">
+          <v-ons-button modifier="quiet" @click="remove(index,item.id);$event.stopPropagation()">
+            <v-ons-icon icon="md-close"></v-ons-icon>
+          </v-ons-button>
+        </div>
+      </v-ons-list-item>
     </v-ons-list>
   </div>
 </v-ons-page>
@@ -112,6 +119,17 @@ export default {
     },
     goRegister() {
       this.$emit('push-page', TodoRegisterPage)
+    },
+    remove(index,id){
+      this.arr.splice(index,1);
+
+      this.axios.delete(`http://59.157.6.140:3001/todos/${id}`)
+      .then((res) => {
+        console.log(`id : ${id} のデータを削除しましたった。`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     },
   },
 };
