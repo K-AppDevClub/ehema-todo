@@ -2,6 +2,12 @@
 .page-title {
   text-align: center;
 }
+.popover {
+  text-align: center;
+  height: 100px;
+  line-height: 100px;
+  width: 100%;
+}
 </style>
 <template>
 <v-ons-page>
@@ -13,7 +19,7 @@
     :cover-target="coverTarget"
   >
     <!-- aaaaaaaa -->
-    <center>{{ infos.content }}</center>
+    <div class="popover">{{ infos.content }}</div>
   </v-ons-popover>
   <div class="page-content">
     <h3 class="page-title">{{ infos.content }}の所在地！</h3>

@@ -2,6 +2,12 @@
 .center {
   text-align: center;
 }
+.popover {
+  text-align: center;
+  height: 100px;
+  line-height: 100px;
+  width: 100%;
+}
 </style>
 <template>
 <v-ons-page>
@@ -12,8 +18,7 @@
     :direction="popoverDirection"
     :cover-target="coverTarget"
   >
-    <!-- aaaaaaaa -->
-    <center>{{ mapIndex.content }}</center>
+    <div class="popover">{{ mapIndex.content }}</div>
   </v-ons-popover>
   <div class="page-content center">
     <v-ons-button @click="goRegister" modifier="outline" style="margin: 15px; padding: 0 60px">登録</v-ons-button>
