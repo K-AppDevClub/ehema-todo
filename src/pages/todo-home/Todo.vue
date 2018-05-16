@@ -6,8 +6,32 @@
 <template>
 <v-ons-page>
   <navbar navType="back" msg="ehama-todo"></navbar>
+  <v-ons-popover cancelable
+    :visible.sync="popoverVisible"
+    :target="popoverTarget"
+    :direction="popoverDirection"
+    :cover-target="coverTarget"
+  >
+    <!-- aaaaaaaa -->
+    <center>{{ mapIndex.content }}</center>
+  </v-ons-popover>
   <div class="page-content center">
     <v-ons-button @click="goRegister" modifier="outline" style="margin: 15px; padding: 0 60px">登録</v-ons-button>
+    <center><GmapMap
+      :center="{lat:31.5699, lng:130.543}"
+      :zoom="14"
+      map-type-id="roadmap"
+      style="width: 50%; height: 200px"
+    >
+      <GmapMarker
+        :key="index"
+        v-for="(infos, index) in arr"
+        :position="{lat:infos.lat, lng:infos.lng}"
+        :clickable="true"
+        :draggable="true"
+        @click="showPopover($event, 'up', index)"
+      />
+    </GmapMap></center>
     <v-ons-list> 
       <v-ons-list-header>
         <v-ons-icon icon="ion-favorite, material:md-favorite"></v-ons-icon>
@@ -31,7 +55,12 @@ export default {
   },
   data() {
     return {
-    arr: [],      
+      arr: [],      
+      popoverVisible: false,
+      popoverTarget: null,
+      popoverDirection: 'up',
+      coverTarget: false,
+      currentIndex: 1,
     };
   },
   created(){
@@ -46,6 +75,11 @@ export default {
         console.log(error);
       });
   },
+  computed: {
+    mapIndex() {
+      return this.arr[this.currentIndex]
+    }
+  },
   methods: {
     goDetail(id) {
       this.$emit('push-page', {
@@ -54,6 +88,15 @@ export default {
           infos: this.arr[id],
         }
       })
+    },
+    showPopover(event, direction, index, coverTarget = false) {
+      console.log(event)
+      console.log(index)
+      this.currentIndex = index;
+      this.popoverTarget = event.Ia;
+      this.popoverDirection = direction;
+      this.coverTarget = coverTarget;
+      this.popoverVisible = true;
     },
     goRegister() {
       this.$emit('push-page', TodoRegisterPage)
